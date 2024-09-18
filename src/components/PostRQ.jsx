@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PostRQ = () => {
   const { data, isLoading, isError, error, refetch } = useQuery({
@@ -23,10 +24,12 @@ const PostRQ = () => {
       {data &&
         data?.data?.map((item) => {
           return (
-            <div className="post-item" key={item.id}>
-              <h3 className="post-title">{item.title}</h3>
-              <p className="post-body">{item.body}</p>
-            </div>
+            <Link to={`/postsrq/${item.id}`}>
+              <div className="post-item" key={item.id}>
+                <h3 className="post-title">{item.title}</h3>
+                <p className="post-body">{item.body}</p>
+              </div>
+            </Link>
           );
         })}
     </div>
