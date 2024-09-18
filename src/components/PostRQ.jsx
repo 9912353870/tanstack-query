@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const PostRQ = () => {
+  const [form, setFormData] = useState(null);
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["posts"],
     queryFn: () => {
@@ -15,12 +16,42 @@ const PostRQ = () => {
     enabled: false, //It won't allow automatic fetching, only allow manual fetching and provide 'refetch' fn to do it
   });
 
+  const { mutate: addMutation } = useMutation({
+    mutationFn: (payload) => {
+        return axios.post("http://localhost:4000/posts", payload);
+      } 
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    addMutation(form);
+  };
+
   if (isError) return <div>{error.message}</div>;
   if (isLoading) return <div>Loading....!</div>;
 
   return (
-    <div className="post-list">
-      <button onClick={refetch}>Fetch</button>
+    <div className="post-list" key="0">
+      <div className="post-item">
+        <form>
+          <input
+            type="text"
+            name="title"
+            onChange={(e) =>
+              setFormData({ ...form, [e.target.name]: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            name="body"
+            onChange={(e) =>
+              setFormData({ ...form, [e.target.name]: e.target.value })
+            }
+          />
+          <button onClick={handleSubmit}>Add Post</button>
+        </form>
+      </div>
       {data &&
         data?.data?.map((item) => {
           return (
@@ -32,6 +63,7 @@ const PostRQ = () => {
             </Link>
           );
         })}
+      <button onClick={refetch}>Fetch</button>
     </div>
   );
 };
