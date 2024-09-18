@@ -3,6 +3,9 @@ import Home from "./components/Home";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import PostTraditional from "./components/PostTraditional";
 import PostRQ from "./components/PostRQ";
+import PostDetailsRQ from "./components/PostDetailsRQ";
+import PaginatedQueries from "./components/PaginatedQueries";
+import InfiniteScroll from "./components/InfiniteScroll";
 
 function App() {
   return (
@@ -24,7 +27,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/posts" element={<PostTraditional />} />
-          <Route exact path="/postsrq" element={<PostRQ />} />
+          <Route exact path="/postsrq" element={<PostRQ />} />{" "}
+          <Route exact path="/postsrq/:postId" element={<PostDetailsRQ />} />
+          <Route exact path="/paginated-queries" element={<PaginatedQueries />} />
+          <Route exact path="/infinite-scroll" element={<InfiniteScroll />} />
         </Routes>
       </div>
     </Router>
