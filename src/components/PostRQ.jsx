@@ -22,14 +22,38 @@ const PostRQ = () => {
     mutationFn: (payload) => {
       return axios.post("http://localhost:4000/posts", payload);
     },
-    onSuccess: (newData) => {
-      //queryClient.invalidateQueries("posts");
+    // onSuccess: (newData) => {
+    //   //queryClient.invalidateQueries("posts");
+    //   queryClient.setQueryData(["posts"], (oldData) => {
+    //     return {
+    //       ...oldData,
+    //       data: [...oldData.data, newData.data],
+    //     };
+    //   });
+    // },
+
+    onMutate: async (newPost) => {
+      await queryClient.cancelQueries(["posts"]);
+      const prevPostData = queryClient.getQueriesData(["posts"]);
       queryClient.setQueryData(["posts"], (oldData) => {
         return {
           ...oldData,
-          data: [...oldData.data, newData.data],
+          data: [
+            ...oldData.data,
+            { ...newPost, id: "" + (oldData.length + 1) },
+          ],
         };
       });
+
+      return {
+        prevPostData,
+      };
+    },
+    onError: (_error, _posts, context) => {
+            return context.prevPostData;
+    },
+    onSettled: () => {
+        queryClient.invalidateQueries("posts");
     },
   });
 
