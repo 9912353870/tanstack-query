@@ -1,19 +1,101 @@
 {
     "posts": [
         {
-            "id": 1,
-            "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-            "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+            "id": "1",
+            "title": "Elon Musk Interview",
+            "body": "Discussing Mars mission"
         },
         {
-            "id": 2,
-            "title": "qui est esse",
-            "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+            "id": "2",
+            "title": "Marques Reviews Tesla",
+            "body": "Tesla's latest EV review"
         },
         {
-            "id": 3,
-            "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
-            "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+            "id": "3",
+            "title": "AI in 2024",
+            "body": "Impact on daily life"
+        }
+    ],
+    "fruits": [
+        {
+            "id": "1",
+            "name": "Apple"
+        },
+        {
+            "id": "2",
+            "name": "Banana"
+        },
+        {
+            "id": "3",
+            "name": "Orange"
+        },
+        {
+            "id": "4",
+            "name": "Strawberry"
+        },
+        {
+            "id": "5",
+            "name": "Mango"
+        },
+        {
+            "id": "6",
+            "name": "Pineapple"
+        },
+        {
+            "id": "7",
+            "name": "Grapes"
+        },
+        {
+            "id": "8",
+            "name": "Watermelon"
+        },
+        {
+            "id": "9",
+            "name": "Blueberry"
+        },
+        {
+            "id": "10",
+            "name": "Cherry"
+        },
+        {
+            "id": "11",
+            "name": "Peach"
+        },
+        {
+            "id": "12",
+            "name": "Plum"
+        },
+        {
+            "id": "13",
+            "name": "Kiwi"
+        },
+        {
+            "id": "14",
+            "name": "Papaya"
+        },
+        {
+            "id": "15",
+            "name": "Pomegranate"
+        },
+        {
+            "id": "16",
+            "name": "Lemon"
+        },
+        {
+            "id": "17",
+            "name": "Coconut"
+        },
+        {
+            "id": "18",
+            "name": "Pear"
+        },
+        {
+            "id": "19",
+            "name": "Guava"
+        },
+        {
+            "id": "20",
+            "name": "Lychee"
         }
     ]
 }
