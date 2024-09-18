@@ -1,10 +1,12 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const PostRQ = () => {
   const [form, setFormData] = useState(null);
+  const queryClient = useQueryClient();
+
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["posts"],
     queryFn: () => {
@@ -13,19 +15,28 @@ const PostRQ = () => {
     // staleTime: 30000 //To clear the stale at regular intervals of given time
     // refetchInterval: 1000, //Helps us to poll every second or desired time
     // refetchIntervalInBackground: true /*By setting this to true even when you're in sperate tab it won't stop fetching */,
-    enabled: false, //It won't allow automatic fetching, only allow manual fetching and provide 'refetch' fn to do it
+    //enabled: false, //It won't allow automatic fetching, only allow manual fetching and provide 'refetch' fn to do it
   });
 
   const { mutate: addMutation } = useMutation({
     mutationFn: (payload) => {
-        return axios.post("http://localhost:4000/posts", payload);
-      } 
+      return axios.post("http://localhost:4000/posts", payload);
+    },
+    onSuccess: (newData) => {
+      //queryClient.invalidateQueries("posts");
+      queryClient.setQueryData(["posts"], (oldData) => {
+        return {
+          ...oldData,
+          data: [...oldData.data, newData.data],
+        };
+      });
+    },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     addMutation(form);
+    setFormData({});
   };
 
   if (isError) return <div>{error.message}</div>;
@@ -38,6 +49,7 @@ const PostRQ = () => {
           <input
             type="text"
             name="title"
+            value={form?.title || ""}
             onChange={(e) =>
               setFormData({ ...form, [e.target.name]: e.target.value })
             }
@@ -45,6 +57,7 @@ const PostRQ = () => {
           <input
             type="text"
             name="body"
+            value={form?.body || ""}
             onChange={(e) =>
               setFormData({ ...form, [e.target.name]: e.target.value })
             }
