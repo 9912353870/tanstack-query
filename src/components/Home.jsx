@@ -1,9 +1,7 @@
 import PostTraditional from "./PostTraditional";
 
 const Home = () => {
-  return <div>
-    <PostTraditional />
-  </div>;
+  return <div className="container"> Home Page</div>;
 };
 
 export default Home;
