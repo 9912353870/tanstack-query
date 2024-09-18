@@ -8,6 +8,7 @@ const PostRQ = () => {
     queryFn: () => {
       return axios.get("http://localhost:4000/posts");
     },
+    staleTime: 30000
   });
 
   if (isError) return <div>{error.message}</div>;
