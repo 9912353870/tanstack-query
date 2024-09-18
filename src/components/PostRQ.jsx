@@ -8,7 +8,9 @@ const PostRQ = () => {
     queryFn: () => {
       return axios.get("http://localhost:4000/posts");
     },
-    staleTime: 30000
+    //staleTime: 30000
+    refetchInterval: 1000, //Helps us to poll every second or desired time
+    refetchIntervalInBackground: true /*By setting this to true even when you're in sperate tab it won't stop fetching */,
   });
 
   if (isError) return <div>{error.message}</div>;
